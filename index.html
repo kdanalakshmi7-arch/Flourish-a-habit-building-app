@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8fc">
+  <meta name="description" content="Flourish — grow gently, one habit at a time.">
+  <title>Flourish | Grow at Your Own Pace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- WELCOME SCREEN -->
+    <section id="welcomeScreen" class="welcome-screen">
+      <div class="welcome-card">
+        <div class="brand-mark">🌷</div>
+        <p class="eyebrow">YOUR LITTLE SPACE TO GROW</p>
+        <h1>Welcome to <span>Flourish</span></h1>
+        <p class="welcome-description">
+          Small steps. Gentle progress. A little more you, every day.
+        </p>
+
+        <form id="welcomeForm">
+          <label for="displayName">What should we call you?</label>
+          <input
+            id="displayName"
+            name="displayName"
+            type="text"
+            maxlength="30"
+            placeholder="Your name (optional)"
+          >
+
+          <label for="firstHabit">What would you like to grow?</label>
+          <input
+            id="firstHabit"
+            name="firstHabit"
+            type="text"
+            maxlength="70"
+            placeholder="e.g. Read for 10 minutes"
+            required
+          >
+
+          <button type="submit" class="primary-button">
+            Let's Flourish 🌱
+          </button>
+        </form>
+
+        <p class="tiny-note">
+          No pressure to be perfect. Just start somewhere.
+        </p>
+      </div>
+
+      <div class="welcome-decoration decoration-one">✿</div>
+      <div class="welcome-decoration decoration-two">✧</div>
+      <div class="welcome-decoration decoration-three">❀</div>
+    </section>
+
+    <!-- MAIN APP -->
+    <div id="mainApp" class="app-layout hidden">
+
+      <aside class="sidebar">
+        <a href="#" class="brand" data-view="home">
+          <span class="brand-icon">🌷</span>
+          <span>Flourish</span>
+        </a>
+
+        <p class="nav-label">YOUR LITTLE WORLD</p>
+
+        <nav class="navigation" aria-label="Main navigation">
+          <button class="nav-item active" data-view="home">
+            <span>🏡</span> Home
+          </button>
+          <button class="nav-item" data-view="garden">
+            <span>🌿</span> My Garden
+          </button>
+          <button class="nav-item" data-view="habits">
+            <span>🌸</span> My Habits
+          </button>
+          <button class="nav-item" data-view="rewards">
+            <span>⭐</span> Rewards
+          </button>
+          <button class="nav-item" data-view="journal">
+            <span>📔</span> Journal
+          </button>
+          <button class="nav-item" data-view="insights">
+            <span>📊</span> Insights
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="note-flower">🌼</span>
+          <p>Remember, little steps still move you forward.</p>
+        </div>
+
+        <button class="nav-item settings-button" data-view="settings">
+          <span>⚙️</span> Settings
+        </button>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="currentDate">YOUR DAILY GROWTH</p>
+            <p class="topbar-subtitle">Your space, your pace. 💗</p>
+          </div>
+          <div class="profile-chip">
+            <span id="profileAvatar">🌷</span>
+            <span id="profileName">Friend</span>
+          </div>
+        </header>
+
+        <!-- HOME -->
+        <section class="page-view" id="view-home">
+          <div class="hero-card">
+            <div class="hero-copy">
+              <p class="eyebrow">A FRESH LITTLE START</p>
+              <h1 id="greeting">Hello, sunshine! ☀️</h1>
+              <p>Every tiny step you take is a little promise to yourself.</p>
+              <button class="primary-button" data-view="habits">
+                Visit my habits <span>→</span>
+              </button>
+            </div>
+            <div class="hero-flower" aria-hidden="true">
+              <span>🌷</span>
+              <span class="floating-star">✦</span>
+              <span class="floating-heart">♡</span>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR PROGRESS</p>
+              <h2>Look at you growing! 🌱</h2>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card pink-card">
+              <span class="stat-icon">🌸</span>
+              <p>Today's progress</p>
+              <h3 id="progressText">0%</h3>
+              <div class="progress-track">
+                <div id="progressBar" class="progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="stat-card purple-card">
+              <span class="stat-icon">✨</span>
+              <p>Your experience</p>
+              <h3><span id="xpValue">0</span> XP</h3>
+              <small id="levelText">Level 1 · Little Seed</small>
+            </article>
+
+            <article class="stat-card green-card">
+              <span class="stat-icon">🌿</span>
+              <p>Garden petals</p>
+              <h3 id="petalValue">0</h3>
+              <small>Earn as you grow</small>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel habits-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">ONE STEP AT A TIME</p>
+                  <h2>Today's little habits</h2>
+                </div>
+                <button class="text-button" data-view="habits">See all →</button>
+              </div>
+              <div id="todayHabits" class="habit-list"></div>
+              <button id="addHabitHome" class="secondary-button">
+                + Add a little habit
+              </button>
+            </section>
+
+            <section class="panel garden-preview">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">GROW WITH EVERY WIN</p>
+                  <h2>Your garden</h2>
+                </div>
+              </div>
+              <div class="mini-garden" aria-label="Your growing garden">
+                <span>🦋</span>
+                <span>🌷</span>
+                <span>🌱</span>
+                <span>🌼</span>
+                <span>🌿</span>
+              </div>
+              <p id="gardenMessage">
+                Your little garden is waiting for its first seed.
+              </p>
+              <button class="secondary-button" data-view="garden">
+                Visit my garden →
+              </button>
+            </section>
+          </div>
+        </section>
+
+        <!-- GARDEN -->
+        <section class="page-view hidden" id="view-garden">
+          <div class="page-heading">
+            <p class="eyebrow">A LITTLE WORLD OF YOUR OWN</p>
+            <h1>My Growth Garden 🌷</h1>
+            <p>Every small win helps your garden flourish.</p>
+          </div>
+
+          <div class="garden-scene">
+            <div class="garden-sky">
+              <span class="garden-cloud cloud-one">☁️</span>
+              <span class="garden-cloud cloud-two">☁️</span>
+              <span class="garden-butterfly">🦋</span>
+              <h2>Welcome to your happy place</h2>
+              <p>Your progress starts with one little seed.</p>
+            </div>
+            <div id="gardenPlants" class="garden-plants">
+              <div class="garden-plot">🌱<small>New beginnings</small></div>
+            </div>
+          </div>
+
+          <div class="stats-grid garden-stats">
+            <article class="stat-card green-card">
+              <p>🌱 Garden energy</p>
+              <h3 id="gardenEnergy">0</h3>
+            </article>
+            <article class="stat-card pink-card">
+              <p>🌷 Growing plants</p>
+              <h3 id="plantCount">0</h3>
+            </article>
+            <article class="stat-card purple-card">
+              <p>✨ Experience</p>
+              <h3 id="gardenXP">0 XP</h3>
+            </article>
+          </div>
+        </section>
+
+        <!-- HABITS -->
+        <section class="page-view hidden" id="view-habits">
+          <div class="page-heading">
+            <p class="eyebrow">TINY STEPS ADD UP</p>
+            <h1>My little habits 🌸</h1>
+            <p>Build a routine that feels good to you.</p>
+          </div>
+
+          <div class="panel">
+            <div class="section-heading">
+              <h2>Your habits</h2>
+              <button id="addHabitButton" class="primary-button">
+                + New habit
+              </button>
+            </div>
+            <div id="allHabits" class="habit-list"></div>
+          </div>
+
+          <dialog id="habitDialog" class="habit-dialog">
+            <form id="habitForm">
+              <p class="eyebrow">A NEW LITTLE PROMISE</p>
+              <h2>Add a habit 🌱</h2>
+
+              <label for="habitName">Habit name</label>
+              <input id="habitName" maxlength="70" required
+                placeholder="e.g. Go for a walk">
+
+              <label for="habitCategory">Category</label>
+              <select id="habitCategory">
+                <option value="Wellness">Wellness</option>
+                <option value="Learning">Learning</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Mindfulness">Mindfulness</option>
+                <option value="Productivity">Productivity</option>
+              </select>
+
+              <label for="habitSchedule">Repeat</label>
+              <select id="habitSchedule">
+                <option value="daily">Every day</option>
+                <option value="weekdays">Monday–Friday</option>
+                <option value="weekends">Saturday–Sunday</option>
+              </select>
+
+              <div class="dialog-actions">
+                <button type="button" id="cancelHabit"
+                  class="secondary-button">Cancel</button>
+                <button type="submit" class="primary-button">Save habit</button>
+              </div>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- REWARDS -->
+        <section class="page-view hidden" id="view-rewards">
+          <div class="page-heading">
+            <p class="eyebrow">CELEBRATE YOUR LITTLE WINS</p>
+            <h1>My rewards ⭐</h1>
+            <p>Every effort matters. Look how far you've come!</p>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card purple-card">
+              <p>✨ Experience points</p>
+              <h3 id="rewardsXP">0 XP</h3>
+            </article>
+            <article class="stat-card pink-card">
+              <p>🌸 Petals collected</p>
+              <h3 id="rewardsPetals">0</h3>
+            </article>
+            <article class="stat-card green-card">
+              <p>🏆 Current level</p>
+              <h3 id="rewardsLevel">Level 1</h3>
+            </article>
+          </div>
+          <div class="panel">
+            <h2>Achievements</h2>
+            <div id="achievementsList" class="achievement-list"></div>
+          </div>
+        </section>
+
+        <!-- JOURNAL -->
+        <section class="page-view hidden" id="view-journal">
+          <div class="page-heading">
+            <p class="eyebrow">A MOMENT JUST FOR YOU</p>
+            <h1>My journal 📔</h1>
+            <p>Make a little room for your feelings and reflections.</p>
+          </div>
+          <div class="panel">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-options">
+              <button type="button" data-mood="Happy">😊 Happy</button>
+              <button type="button" data-mood="Calm">😌 Calm</button>
+              <button type="button" data-mood="Okay">🙂 Okay</button>
+              <button type="button" data-mood="Tired">😴 Tired</button>
+              <button type="button" data-mood="Sad">🥺 Sad</button>
+            </div>
+            <form id="journalForm">
+              <label for="journalText">What's on your mind?</label>
+              <textarea id="journalText" rows="4" maxlength="2000"
+                placeholder="Write about your day, a little win, or anything you feel..."></textarea>
+              <button class="primary-button" type="submit">Save reflection 💗</button>
+            </form>
+            <div id="journalEntries" class="journal-entries"></div>
+          </div>
+        </section>
+
+        <!-- INSIGHTS -->
+        <section class="page-view hidden" id="view-insights">
+          <div class="page-heading">
+            <p class="eyebrow">EVERY STEP COUNTS</p>
+            <h1>Your growth story 📊</h1>
+            <p>Look back at your consistency, one day at a time.</p>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card pink-card">
+              <p>🌸 Completions</p>
+              <h3 id="insightCompletions">0</h3>
+            </article>
+            <article class="stat-card green-card">
+              <p>🌱 Active habits</p>
+              <h3 id="insightHabits">0</h3>
+            </article>
+            <article class="stat-card purple-card">
+              <p>✨ Total experience</p>
+              <h3 id="insightXP">0 XP</h3>
+            </article>
+          </div>
+          <div class="panel">
+            <h2>This week</h2>
+            <div id="weeklyChart" class="weekly-chart"></div>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="page-view hidden" id="view-settings">
+          <div class="page-heading">
+            <p class="eyebrow">MAKE YOURSELF AT HOME</p>
+            <h1>Settings ⚙️</h1>
+            <p>Your app, your preferences.</p>
+          </div>
+
+          <div class="panel settings-panel">
+            <div class="setting-row">
+              <div>
+                <h3>Dark theme 🌙</h3>
+                <p>Give your eyes a softer evening.</p>
+              </div>
+              <input type="checkbox" id="themeToggle" aria-label="Dark theme">
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Playful sounds 🎵</h3>
+                <p>Hear a little celebration when you complete a habit.</p>
+              </div>
+              <input type="checkbox" id="soundToggle" checked
+                aria-label="Playful sounds">
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Your display name 🌷</h3>
+                <p>Change the name Flourish uses to greet you.</p>
+              </div>
+              <button id="changeName" class="secondary-button">Change</button>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Export your data 📦</h3>
+                <p>Save a backup of your Flourish information.</p>
+              </div>
+              <button id="exportData" class="secondary-button">Export</button>
+            </div>
+            <div class="setting-row">
+              <div>
+                <h3>Start fresh 🌱</h3>
+                <p>Reset your local app data.</p>
+              </div>
+              <button id="resetData" class="danger-button">Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <footer class="app-footer">
+          Made with a little love and a lot of hope 💗
+          <span>Flourish · Grow at your own pace</span>
+        </footer>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
